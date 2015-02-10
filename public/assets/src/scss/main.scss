@@ -1,0 +1,196 @@
+@import 'libs/bootstrap/bootstrap.scss';
+
+$header_background: #090909;
+$header_color: #FFF;
+$sidebar_background: #F1F1F1;
+$main_background: #FFFFFF;
+$default-transition-speed: 0.25s;
+$default-transition-function: linear;
+
+@mixin gradient($from:#545454, $to:#222222) {
+	background-image: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(0, $from),
+		color-stop(1, $to)
+		);
+	background-image: -o-linear-gradient(bottom, $from 0%, $to 100%);
+	background-image: -moz-linear-gradient(bottom, $from 0%, $to 100%);
+	background-image: -webkit-linear-gradient(bottom, $from 0%, $to 100%);
+	background-image: -ms-linear-gradient(bottom, $from 0%, $to 100%);
+	background-image: linear-gradient(to bottom, $from 0%, $to 100%);
+}
+
+@mixin fast-transition($attr) {
+	-webkit-transition: $attr $default-transition-speed $default-transition-function;
+	-moz-transition: $attr $default-transition-speed $default-transition-function;
+	-ms-transition: $attr $default-transition-speed $default-transition-function;
+	-o-transition: $attr $default-transition-speed $default-transition-function;
+	transition: $attr $default-transition-speed $default-transition-function;
+}
+
+@import 'blocks/header.scss';
+@import 'modules/chart.scss';
+
+body {
+
+	font-family: 'Raleway', sans-serif;
+	
+	a,a:hover, a:active, a:focus {
+	   outline: 0;
+	}
+
+	background: $sidebar_background;
+
+	> .navbar {
+		margin-bottom: 0;
+		text-transform: uppercase;
+		font-weight: 600;
+		@include gradient();
+		text-shadow: 1px 1px 3px #000000;
+	}
+
+	> .page-header {
+		@include gradient(#090909,#222222);
+		color: $header_color;
+		margin: 0;
+		padding: 10px;
+		overflow: hidden;
+
+		h1 {
+			margin: 5px 0;
+			font-weight: 800;
+			text-transform: uppercase;
+			text-shadow: 1px 1px 3px #000000; 
+		}
+
+		input[type="text"] {
+			height: 49px;
+		}
+
+		button {
+			background: transparent;
+			border: 0;
+			position: absolute;
+			right: 20px;
+			top: 16px;
+		}
+	}
+
+	> .wrapper {
+		overflow: hidden;
+
+		> div {
+			padding: 10px;
+
+			&#main {
+				background: $main_background;
+				overflow: hidden;
+			}
+
+			&#sidebar {
+				> .panel-group {
+
+					.panel-title {
+						overflow: hidden;
+
+						a {
+							display: block;
+							overflow: hidden;
+						}
+
+						span:first-child {
+							display: block;
+							float: left;
+							width: 70%;
+							overflow: hidden;
+						}
+					}
+
+					a {
+						text-decoration: none;
+						white-space: nowrap;
+					}
+
+					.caret {
+						float: right;
+						margin-top: 8px;
+					}
+
+					.badge {
+						float: right;
+						display: block;
+						margin-right: 5px;
+					}
+				}
+			}
+		}
+	}
+
+	.tab-content {
+		padding: 10px 0;
+	}
+
+	.datepicker.dropdown-menu {
+		z-index: 1060 !important;
+	}
+
+	.actions {
+		.reopen-task {
+			display: none;
+		}
+
+		&.complete {
+			a {
+				display: none;
+
+				&.reopen-task {
+					display: inline-block;
+				}
+			}
+		}
+	}
+
+	.headerSortDown:before,
+	.headerSortUp:before {
+		font-family: 'Glyphicons Halflings';
+		content: "";
+		float: left;
+		margin-right: 5px;
+	}
+
+	.headerSortUp:before {
+		content: "";
+	}
+
+	th {
+		cursor: pointer;
+	}
+
+	.drop-form a:before {
+		font-family: 'Glyphicons Halflings';
+		content: "";
+		float: left;
+		margin-right: 5px;
+	}
+
+	.drop-form a.active:before {
+		content: "";
+	}
+}
+
+@media (max-width: $screen-md) {
+	body {
+
+		> .navbar {
+			font-size: 10px;
+		}
+
+		> .page-header {
+			h1 {
+				text-align: center;
+			}
+		}
+	}
+}
